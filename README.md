@@ -7,9 +7,11 @@ Redux maker is an action creator and reducers helper that will create the action
 create actions + reducers return
 
 ```jsx
+import 'ReduxMaker' from '@itemku/redux-maker';
+
 export const Actions = {
   testChangeId: (userId: number) => {
-    let state: IReducers = store.getState();
+    let state = store.getState();
     return {
       user: {
         ...state.reducersTest.user,
@@ -19,7 +21,7 @@ export const Actions = {
   },
 
   testChangeEmailPassword: (email: string, password: string) => {
-    let state: IReducers = store.getState();
+    let state = store.getState();
     return {
       user: {
         ...state.reducersTest.user,
@@ -43,8 +45,11 @@ const testAction = (test: AnyAction) => {
 
 const testReducers = new ReduxMaker('TEST', INITIAL_STATE, Actions, Sagas);
 
+export default testReducers; // for getting name info etc
+
 export const sagas = [
   takeLatest(testReducers.names.testLoginSagas, testAction),
-];
-export default testReducers;
+]; // for sagas part
+export const reducers = testReducers.getReducers; // for reducers part
+
 ```
