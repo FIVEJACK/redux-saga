@@ -1,6 +1,7 @@
 # Redux Maker
 
 [![npm version](https://badge.fury.io/js/%40itemku%2Fredux-maker.svg)](https://badge.fury.io/js/%40itemku%2Fredux-maker)
+![CI](https://github.com/FIVEJACK/redux-saga/workflows/CI/badge.svg?branch=master)
 
 Redux maker is an action creator and reducers helper that will create the actions and name for you
 
