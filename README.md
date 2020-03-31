@@ -1,5 +1,7 @@
 # Redux Maker
 
+[![Version][version-badge]][package]
+
 Redux maker is an action creator and reducers helper that will create the actions and name for you
 
 # Quickstart
@@ -30,7 +32,18 @@ export const Actions = {
       },
     };
   },
+
+  testChangeEmailPasswordAlternative: (email: string, password: string) => (prevState: any) => {
+    return {
+      user: {
+        ...prevState.reducersTest.user,
+        email: email,
+        password: password,
+      },
+    };
+  },
 };
+
 
 export const Sagas = {
   testLoginSagas: (email: string, password: string) => ({

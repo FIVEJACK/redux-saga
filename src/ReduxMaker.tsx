@@ -1,4 +1,4 @@
-import { AnyAction } from "redux";
+import { AnyAction } from 'redux';
 
 type Unmapped = {
   [name: string]: (...args: any[]) => any;
@@ -35,16 +35,16 @@ export class ReduxMaker<T extends Unmapped, U extends Unmapped, V> {
     const actionsList: any = {};
 
     for (let [key, value] of Object.entries({ ...actions, ...sagas })) {
-      const reducerName = name + "/" + key;
+      const reducerName = name + '/' + key;
       newNames[key] = reducerName;
       actionsList[key] = (...args: any[]) => ({
         type: reducerName,
-        payload: value(...args)
+        payload: value(...args),
       });
     }
 
     for (let key of Object.keys(actions)) {
-      const reducerName = name + "/" + key;
+      const reducerName = name + '/' + key;
       reducers.set(reducerName, {});
     }
 
@@ -57,14 +57,24 @@ export class ReduxMaker<T extends Unmapped, U extends Unmapped, V> {
   getReducers = (state: V = this.initialState, action: AnyAction): any => {
     let stateController = this.reducersCase.get(action.type);
     if (stateController != undefined) {
-      return {
-        ...state,
-        ...action.payload
-      };
+      if (action.payload instanceof Function) {
+        if (action.payload.length == 1) {
+          console.log('HERE', action.payload(state));
+          return {
+            ...state,
+            ...action.payload(state),
+          };
+        }
+      } else {
+        return {
+          ...state,
+          ...action.payload,
+        };
+      }
     }
 
     return {
-      ...state
+      ...state,
     };
   };
 }
