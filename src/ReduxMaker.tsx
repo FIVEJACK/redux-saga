@@ -73,8 +73,6 @@ export class ReduxMaker<T extends Unmapped, U extends Unmapped, V> {
       }
     }
 
-    return {
-      ...state,
-    };
+    return state;
   };
 }
