@@ -59,7 +59,6 @@ export class ReduxMaker<T extends Unmapped, U extends Unmapped, V> {
     if (stateController != undefined) {
       if (action.payload instanceof Function) {
         if (action.payload.length == 1) {
-          console.log('HERE', action.payload(state));
           return {
             ...state,
             ...action.payload(state),
